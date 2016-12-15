@@ -54,7 +54,7 @@ router.get('/divide', function(req, res, next) {
     tags: query.tags,
     words: strMapToObj(words),
     status: 'ok',
-    timestamp: Date.now
+    timestamp: Date.now()
   })
 });
 
