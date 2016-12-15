@@ -24,7 +24,7 @@ function strMapToObj(strMap) {
 router.get('/', function(req, res, next) {
   let {text, tags = 'star,brands'} = req.query
   tags = tags.split(',')
-    let query = {
+  let query = {
     top: 0,
     tags
   };
@@ -42,7 +42,12 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/divide', function(req, res, next) {
-  let {text} = req.query
+  let {text, tags = 'star,brands'} = req.query
+  tags = tags.split(',')
+  let query = {
+    top: 0,
+    tags
+  };
   let params = {
     text: text,
     dict: dict,
