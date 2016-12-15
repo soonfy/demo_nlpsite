@@ -1,8 +1,9 @@
 # nlpsite  
 
 ```
-html
-/?text=""
-json
-/divide/text=""
+port-3042
+uri-html
+/?text=""&tags=""
+uri-json
+/divide/text=""&tags=""
 ```
