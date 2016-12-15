@@ -9,7 +9,7 @@ const fs = require('fs')
 let userDict = path.join(__dirname, '../userDict/brands.txt')
 
 let dict = {
-  userDict: userDict
+  // userDict: userDict
 };
 
 function strMapToObj(strMap) {
