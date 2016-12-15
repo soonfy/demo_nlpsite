@@ -34,10 +34,26 @@ router.get('/', function(req, res, next) {
   }
   let words = oops.divide(params, 'obj');
   console.log(words);
+  res.render('index', {
+    title: '分词',
+    text,
+    words
+  })
+});
+
+router.get('/divide', function(req, res, next) {
+  let {text} = req.query
+  let params = {
+    text: text,
+    dict: dict,
+    query: query
+  }
+  let words = oops.divide(params, 'obj');
+  console.log(words);
   res.send({
     title: '分词',
     text,
-    // words: [...words],
+    tags: query.tags,
     words: strMapToObj(words)
   })
 });
