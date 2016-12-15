@@ -13,7 +13,7 @@ let query = {
 };
 
 let dict = {
-  userDict: userDict
+  // userDict: userDict
 };
 
 function strMapToObj(strMap) {
@@ -33,7 +33,6 @@ router.get('/', function(req, res, next) {
     query: query
   }
   let words = oops.divide(params, 'obj');
-  console.log(words);
   res.render('index', {
     title: '分词',
     text,
@@ -49,7 +48,6 @@ router.get('/divide', function(req, res, next) {
     query: query
   }
   let words = oops.divide(params, 'obj');
-  console.log(words);
   res.send({
     title: '分词',
     text,
