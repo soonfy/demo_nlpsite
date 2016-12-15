@@ -42,26 +42,28 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/divide', function(req, res, next) {
-  let {text, tags = 'star,brands'} = req.query
+  let {text, tags = 'star,brand'} = req.query
   tags = tags.split(',')
-  let query = {
-    top: 0,
-    tags
-  };
-  let params = {
-    text: text,
-    dict: dict,
-    query: query
+  let words = {}
+  for(let tag of tags){
+    let query = {
+      top: 0,
+      tags: [tag]
+    };
+    console.log(query);
+    let params = {
+      text: text,
+      dict: dict,
+      query: query
+    }
+    words[tag] = strMapToObj(oops.divide(params, 'obj'));
   }
-  let words = oops.divide(params, 'obj');
-  res.send({
+  console.log(words);
+  res.send(Object.assign({
     title: '分词',
     text,
-    tags: query.tags,
-    words: strMapToObj(words),
-    status: 'ok',
-    timestamp: Date.now()
-  })
+    tags,
+  }, words, {timestamp: Date.now()}))
 });
 
 module.exports = router;
