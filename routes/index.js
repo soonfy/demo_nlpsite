@@ -13,7 +13,7 @@ let query = {
 };
 
 let dict = {
-  // userDict: userDict
+  userDict: userDict
 };
 
 function strMapToObj(strMap) {
@@ -54,7 +54,9 @@ router.get('/divide', function(req, res, next) {
     title: '分词',
     text,
     tags: query.tags,
-    words: strMapToObj(words)
+    words: strMapToObj(words),
+    status: 'ok',
+    timestamp: Date.now
   })
 });
 
