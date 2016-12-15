@@ -7,13 +7,8 @@ const fs = require('fs')
 
 let userDict = path.join(__dirname, '../userDict/stars.txt')
 
-let query = {
-  top: 0,
-  tags: ['star']
-};
-
 let dict = {
-  // userDict: userDict
+  userDict: userDict
 };
 
 function strMapToObj(strMap) {
@@ -26,7 +21,12 @@ function strMapToObj(strMap) {
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  let {text} = req.query
+  let {text, tags = 'star,brands'} = req.query
+  tags = tags.split(',')
+    let query = {
+    top: 0,
+    tags
+  };
   let params = {
     text: text,
     dict: dict,
