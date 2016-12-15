@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <script src="/jquery/dist/jquery.min.js"></script>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <h4><%= text %></h4>
+    <% for (let [word, freq] of words.entries()) { %>
+    <p>
+      <span><%= word %></span><span><%= freq %></span>
+    </p>
+    <% } %>
+    <script src="/javascripts/nlp.js"></script>
+  </body>
+</html>
