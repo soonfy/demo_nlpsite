@@ -5,7 +5,8 @@ const path = require('path')
 const {nlpir, oops} = require('nlp_sf')
 const fs = require('fs')
 
-let userDict = path.join(__dirname, '../userDict/stars.txt')
+// let userDict = path.join(__dirname, '../userDict/stars.txt')
+let userDict = path.join(__dirname, '../userDict/brands.txt')
 
 let dict = {
   userDict: userDict
