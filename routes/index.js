@@ -6,10 +6,11 @@ const {nlpir, oops} = require('nlp_sf')
 const fs = require('fs')
 
 // let userDict = path.join(__dirname, '../userDict/stars.txt')
-let userDict = path.join(__dirname, '../userDict/brands.txt')
+// let userDict = path.join(__dirname, '../userDict/brands.txt')
+let userDict = path.join(__dirname, '../userDict/films.txt')
 
 let dict = {
-  // userDict: userDict
+  userDict: userDict
 };
 
 function strMapToObj(strMap) {
@@ -42,7 +43,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/divide', function(req, res, next) {
-  let {text, tags = 'star,brand'} = req.query
+  let {text, tags = 'star,brand,film'} = req.query
   tags = tags.split(',')
   let words = {}
   for(let tag of tags){
