@@ -23,7 +23,7 @@ function strMapToObj(strMap) {
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  let {text, tags = 'star,brands'} = req.query
+  let {text, tags = 'star,brand,film'} = req.query
   tags = tags.split(',')
   let query = {
     top: 0,
