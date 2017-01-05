@@ -5,24 +5,18 @@ const path = require('path')
 const {nlpir, oops} = require('nlp_sf')
 const fs = require('fs')
 
-// let userDict = path.join(__dirname, '../userDict/stars.txt')
-// let userDict = path.join(__dirname, '../userDict/brands.txt')
-// let userDict = path.join(__dirname, '../userDict/films.txt')
-
-let dict = {
-  // userDict: userDict
-};
+let userDictPath = path.join(__dirname, '../userDict')
 
 function strMapToObj(strMap) {
   let obj = Object.create(null);
-  for (let [k,v] of strMap) {
+  for (let [k, v] of strMap) {
     obj[k] = v;
   }
   return obj;
 }
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
   let {text, tags = 'star,brand,film'} = req.query
   tags = tags.split(',')
   let query = {
@@ -31,7 +25,6 @@ router.get('/', function(req, res, next) {
   };
   let params = {
     text: text,
-    dict: dict,
     query: query
   }
   let words = oops.divide(params, 'obj');
@@ -42,11 +35,11 @@ router.get('/', function(req, res, next) {
   })
 });
 
-router.get('/divide', function(req, res, next) {
+router.get('/divide', function (req, res, next) {
   let {text, tags = 'star,brand,film'} = req.query
   tags = tags.split(',')
   let words = {}
-  for(let tag of tags){
+  for (let tag of tags) {
     let query = {
       top: 0,
       tags: [tag]
@@ -54,17 +47,37 @@ router.get('/divide', function(req, res, next) {
     console.log(query);
     let params = {
       text: text,
-      dict: dict,
       query: query
     }
     words[tag] = strMapToObj(oops.divide(params, 'obj'));
   }
-  console.log(words);
   res.send(Object.assign({
     title: '分词',
     text,
     tags,
-  }, words, {timestamp: Date.now()}))
+  }, words, { timestamp: Date.now() }))
+});
+
+router.get('/update', function (req, res, next) {
+  let {text, tags = 'star,brand,film'} = req.query
+  tags = tags.split(',')
+  let userDicts = fs.readdirSync(userDictPath)
+  for (let userDict of userDicts) {
+    userDict = path.join(userDictPath, userDict)
+    let dict = {
+      userDict: userDict
+    };
+    let params = {
+      text: text || '',
+      dict: dict
+    }
+    oops.divide(params, 'obj');
+  }
+  res.send(Object.assign({
+    title: '字典',
+    text,
+    tags,
+  }, { timestamp: Date.now() }))
 });
 
 module.exports = router;
