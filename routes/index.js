@@ -59,8 +59,6 @@ router.get('/divide', function (req, res, next) {
 });
 
 router.get('/update', function (req, res, next) {
-  let {text, tags = 'star,brand,film'} = req.query
-  tags = tags.split(',')
   let userDicts = fs.readdirSync(userDictPath)
   for (let userDict of userDicts) {
     userDict = path.join(userDictPath, userDict)
@@ -68,15 +66,14 @@ router.get('/update', function (req, res, next) {
       userDict: userDict
     };
     let params = {
-      text: text || '',
+      text: '',
       dict: dict
     }
     oops.divide(params, 'obj');
   }
   res.send(Object.assign({
     title: '字典',
-    text,
-    tags,
+    userDicts,
   }, { timestamp: Date.now() }))
 });
 
