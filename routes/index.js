@@ -46,7 +46,7 @@ router.get('/divide', function (req, res, next) {
     };
     console.log(query);
     let params = {
-      text: text,
+      text: text || '输入文本有误。',
       query: query
     }
     words[tag] = strMapToObj(oops.divide(params, 'obj'));
@@ -66,7 +66,7 @@ router.get('/update', function (req, res, next) {
       userDict: userDict
     };
     let params = {
-      text: '',
+      text: '更新字典。',
       dict: dict
     }
     oops.divide(params, 'obj');
