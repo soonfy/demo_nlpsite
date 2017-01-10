@@ -36,7 +36,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/divide', function (req, res, next) {
-  let {text, tags = 'stars,brands'} = req.query
+  let {text, tags = 'stars,brands,films'} = req.query
   tags = tags.split(',')
   let words = {}
   for (let tag of tags) {
